@@ -1,4 +1,124 @@
-#stuff{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    
 }
+/* @font-face {
+    font-family: "Roboto";
+    src: url("../font/CustomFont.eot");
+    src: url("CustomFont.woff") format("woff"),
+    url("CustomFont.otf") format("opentype"),
+    url("CustomFont.svg#filename") format("svg");
+    } */
+#mainLayout{
+    display: grid;
+    grid-template-rows: 100vh auto auto;
+    border:1px solid black;
+    box-sizing: border-box;
+}
+#banner{
+    box-sizing: border-box;
+
+    background-image: url("../images/interstellar.png");
+    min-height: 50rem;
+    background-size: cover;
+}
+#banner{
+    display: grid;
+    grid-template-rows: 10% auto;
+    overflow: hidden;
+    
+}
+#message{
+    justify-items: center;
+    text-align: center;
+    color:#D7FAFF;
+    font-size: 5rem;
+    align-self: center;
+    font-family: 'Roboto';
+}
+#banner nav ul{
+    max-width: 1200px;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    color: linen;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Roboto';
+    margin-top: 1rem;
+}
+
+#middle{
+    background-color: #191C1F;
+    font-family: "Roboto";
+    padding: 2rem;
+    color:#E35E36;
+    text-align: center;
+}
+#middle div a{
+    display: inline;
+    list-style: none;
+    font-size: .8rem;
+    color: #D7FAFF;
+    padding: 1rem;
+}
+#movieList{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    background-color: #222B31;
+    max-width: 100vw;
+    justify-content: space-around;
+
+}
+.movieBox{
+    width:300px;
+    margin:0px;
+    margin-top: 30px;;
+}
+.movie-title{
+    color:#D7FAFF;
+    font-family: Roboto;
+    padding:5px;
+}
+.movieImage img{
+    position: relative;
+    max-width:300px;
+    height: auto;
+    border-radius: 5% 5% 0% 0%;
+    box-shadow: 5px 5px 5px #2c3942;
+    border:2px solid #222;
+    
+}
+.movieImage img:hover{
+    animation-name: borderChange;
+    animation-direction: alternate;
+    animation-duration: 1s;
+}
+.movieBox :hover{
+    cursor:pointer;
+    
+}
+.movieID{
+    display: none;
+}
+.rating{
+    text-align: center;
+    background-color:#e9bc2a;
+    border-radius:30%;
+    width:35px;
+    height:30px;
+    margin: -20px auto;
+    z-index: 1;
+    font-size: large;
+    font-weight: bolder;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
+    position:relative;
+    color: #081633;
+}
+
+@keyframes borderChanged {
+    from {width: ;}
+    to {transform: rotate(20deg);}
+  }
