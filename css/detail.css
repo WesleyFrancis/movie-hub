@@ -1,0 +1,104 @@
+*{
+box-sizing: border-box;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+body{
+    background-color: #191C1F;
+}
+nav{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+}
+nav img{
+    margin-top: 10px;
+    justify-self: normal;
+}
+nav ul{    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 600px;
+    margin: 10px auto;
+    background-color:#222B31 ;
+    list-style: none;
+    text-align: center;
+    color: cornsilk;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-radius: 12px;
+}
+nav ul li{
+    padding: 1rem;
+}
+nav ul li:hover {
+    transition: background 1s;
+    background-color: #17547c;
+    cursor: pointer;
+}
+#detail{
+    background-size: cover;
+    background-repeat:no-repeat;
+    padding-left: 1rem;
+    background-blend-mode: overlay;
+}
+#mainPage{
+    color: lightcyan;
+    margin-top: 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#imgcont{
+    justify-self: center;
+    align-content: center;
+    
+}
+#movTitle{
+    font-size: 3rem;
+    font-weight: bolder;
+    color: #fff;
+}
+#movTitle span{
+    font-size: 1.5rem;
+}
+#movDesc{
+    margin-top: .5rem;
+}
+#movScore{
+    padding-top: 2rem;
+    color: #cdffff;
+  
+}
+#movScore span{
+    color: #e00459;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+#movRuntimeDirector{
+    color: lightcyan;
+    padding-top: 2rem;
+}
+#movYearTitle{
+    color: lightcyan;
+    padding-top: 2rem;
+}
+#imgcont div{
+    text-align: center;
+    font-size: 1.5rem;
+}
+#playTrailer
+{
+    box-sizing: border-box;
+    width: 220px;
+    height: 328px;
+    background-size: contain;
+    border-radius: 15px;
+    border:2px solid #fff;
+    box-shadow:5px 5px 15px hsla(180, 100%, 90%, 0.452);
+}
+#playTrailer:hover{
+    cursor: pointer;
+}
