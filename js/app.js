@@ -27,7 +27,9 @@ const main=
         const movYearTitle=document.querySelector("#movYearTitle");
         const movScore=document.querySelector("#movScore");
         const poster = document.querySelector("#playTrailer");
-
+        const playTrailer = document.querySelector("#playTrailer");
+        const youtubePopOver = document.querySelector("#youtubePopOver");
+        const close = document.querySelector("#youtubePopOver button");
         //------------- VARIABLES -------------------
 
         if(sessionStorage.getItem("movieID")==null)
@@ -78,6 +80,26 @@ const main=
             })
             .catch()
         }
+
+        playTrailer.addEventListener("click",()=>{
+            youtubePopOver.style.display="block";
+           const ytplayer=document.querySelector("#ytplayer");
+           //&origin=http://example.com
+           fetch(`https://api.themoviedb.org/3/movie/${mov_id}/videos?api_key=d25d36b5b143baf855bd638c506138a7&language=en-US`)
+           .then((response)=>{
+               response.json()
+               .then((data)=>{
+                ytplayer.setAttribute("src",`https://www.youtube.com/embed/${data.results[0].key}?autoplay=1`);
+               })
+               .catch()
+           })
+           .catch()
+
+        })
+
+        close.addEventListener("click",()=>{
+            youtubePopOver.style.display="none";
+        })
     },
     Loader()
     {
