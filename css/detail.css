@@ -128,6 +128,9 @@ nav ul li:hover {
     margin-left: -20px;
     padding: 0px;
 }
+#youtubePopOver:hover{
+    cursor: pointer;
+}
 #ytplayer{
     display: grid;
     grid-template-rows: 1fr;
@@ -135,4 +138,8 @@ nav ul li:hover {
     align-content: center;
     position: relative;
     margin: 0px auto;
+    width:60vw;
+    height:40vw;
+
+    width="640" height="360"
 }

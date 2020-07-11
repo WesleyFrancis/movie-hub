@@ -16,9 +16,7 @@ const main=
     Display()
     {
         // ! Implement the ability to fetch information from the url if it does not exist in session data
-        const url_string = window.location.href;
-        const url = new URL(url_string);
-        const mov_id = url.searchParams.get("id");console.log(`movie Id - ${mov_id}`);
+        
         //------------- VARIABLES -------------------
         const detail=document.querySelector("#detail");
         const movTitle=document.querySelector("#movTitle");
@@ -31,10 +29,13 @@ const main=
         const youtubePopOver = document.querySelector("#youtubePopOver");
         const close = document.querySelector("#youtubePopOver button");
         //------------- VARIABLES -------------------
-
-        if(sessionStorage.getItem("movieID")==null)
+        const url_string = window.location.href;
+        const url = new URL(url_string);
+        const mov_id = url.searchParams.get("id");
+        const page_id = url.searchParams.get("page");
+        console.log(mov_id);
+        if(mov_id==null||mov_id=="")
         {
-
             window.location = "../index.html";
         }
         else
@@ -47,17 +48,11 @@ const main=
             let info;
             let genres= "";
             //use data in session storage
-            info = JSON.parse(sessionStorage.getItem("movieID"));
-            console.log(info);
-            detail.style.backgroundImage=`url(https://image.tmdb.org/t/p/original/${info.backdrop_path})`;
-            movTitle.innerHTML= `${info.title} <span>(${info.release_date.slice(0,4)})</span>`;
-            movDesc.innerHTML= `${info.overview}`;
-            movYearTitle.innerHTML= `${info.title}`;
-            movRuntimeDirector.innerHTML= `${info.title}`;
-            movScore.innerHTML= `Rating - <span>${info.vote_average} </span>/ 10`;
-            poster.style.backgroundImage = `url("https://image.tmdb.org/t/p/w500${info.poster_path}")`;
+           // info = JSON.parse(sessionStorage.getItem("movieID"));
+           
+            
             console.log(poster);
-            fetch(`https://api.themoviedb.org/3/movie/${info.id}?api_key=d25d36b5b143baf855bd638c506138a7&language=en-US`)
+            fetch(`https://api.themoviedb.org/3/movie/${mov_id}?api_key=d25d36b5b143baf855bd638c506138a7&language=en-US`)
             .then((response)=>{
                 response.json()
                 .then((data)=>{
@@ -75,6 +70,13 @@ const main=
 
                     movYearTitle.innerHTML = `Genres  - ${genres}`
                     movRuntimeDirector.innerHTML=`Runtime - ${data.runtime} mins`;
+                    detail.style.backgroundImage=`url(https://image.tmdb.org/t/p/original/${data.backdrop_path})`;
+                    movTitle.innerHTML= `${data.title} <span>(${data.release_date.slice(0,4)})</span>`;
+                    movDesc.innerHTML= `${data.overview}`;
+                   
+                  
+                    movScore.innerHTML= `Rating - <span>${data.vote_average} </span>/ 10`;
+                    poster.style.backgroundImage = `url("https://image.tmdb.org/t/p/w500${data.poster_path}")`;
                 })
                 .catch()
             })
@@ -99,78 +101,83 @@ const main=
 
         close.addEventListener("click",()=>{
             youtubePopOver.style.display="none";
+            youtubePopOver.setAttribute("class","");
+            youtubePopOver.setAttribute("class","animate__animated animate__backInUp");
+        })
+        youtubePopOver.addEventListener("click",()=>{
+            youtubePopOver.style.display="none";
         })
     },
     Loader()
     {
+        const url_string = window.location.href;
+        const url = new URL(url_string);
+        let  page_id = url.searchParams.get("page");
+            console.log(page_id);
+        if(page_id==null)
+        {
+            page_id=1;
+        }
         let dataa;
         document.addEventListener("DOMContentLoaded",()=>{
-            const END_POINT="https://api.themoviedb.org/3/movie/now_playing?api_key=d25d36b5b143baf855bd638c506138a7&language=en-US&page=1";
+            const END_POINT=`https://api.themoviedb.org/3/movie/now_playing?api_key=d25d36b5b143baf855bd638c506138a7&language=en-US&page=${page_id}`;
             fetch(END_POINT)
-            
             .then((response)=>{
                 response.json()
                 .then((data)=>{
-                    const scrn=document.querySelector("#movieList");
-                    
                     let str="";
-                    
+                    dataa =data;
                     let content="";
-                    dataa = data;
-                        data.results.forEach((element,re)=> {
+                    const scrn=document.querySelector("#movieList");
+                    data.results.forEach((element,re)=> {
 
                         if(element.overview.length>40)
                         {
                             str=element.overview.slice(0,60)
                         }
                         const date=element.release_date.slice(0,4);
-                        
-                       // console.log(element);
+                                    
+                        // console.log(element);
                         content+= `<div class="movieBox animate__animated animate__fadeInUp animate_delay-4s 4s"> 
                                         <div class="rating">${element.vote_average}</div>
                                         <div class="movieImage">
-                                            <img id="${re}" src="https://image.tmdb.org/t/p/w500/${element.poster_path}" width="300px">
+                                            <img id="${element.id}" src="https://image.tmdb.org/t/p/w500/${element.poster_path}" width="300px">
                                         </div>
                                         <div class="movie-title">
                                             ${element.title} &nbsp;-${date} <br/><br/><span>${str}&hellip;<button> &nbsp;+&nbsp;</button></span>
                                         </div>
-
+            
                                         <div class="movieID">
                                             ${element.id}
                                         </div>
                                     </div>`;  
-                    });
-                    
-                    scrn.innerHTML=content;
-                     
+                                });
+                                scrn.innerHTML=content;
+
+
+
                 })
-                .catch(err=>console.log(err))
+                .catch()
             })
-            .catch(err=>console.log("error occured"))
-
-
-
+            .catch()
+        });
 
         
         let movieBox=document.querySelector("#movieList");
         movieBox.addEventListener("click",(evt)=>{
-            let MovieList=document.querySelectorAll(".movieBox");
-            // alert(evt.target);
-            sessionStorage.setItem("movieID",JSON.stringify(dataa.results[evt.target.id]))
-          //  console.log(dataa.results[evt.target.id]);
-      //  console.log(evt.target.id);
-            window.location =`html/detail.html?id=${dataa.results[evt.target.id].id}`;
+            console.log(evt.target.id);
+        window.location =`html/detail.html?id=${evt.target.id}`;
         });
-        })
-    },
-    GetInfo(Stringg)
-    {
-        let info="s";
-        
 
-        
-    }
-}
+
+
+
+    }//END LOADER PAGE
+}//END MAIN CLASS
+
+
 main.init();
 // main.acccoun t();
-    
+//!generic privicy policy
+//generic shipping policy
+//!generic return policy
