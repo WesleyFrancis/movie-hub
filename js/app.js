@@ -113,6 +113,7 @@ const main=
         const url_string = window.location.href;
         const url = new URL(url_string);
         let  page_id = url.searchParams.get("page");
+        let Totalpages;
             console.log(page_id);
         if(page_id==null)
         {
@@ -133,11 +134,11 @@ const main=
 
                         if(element.overview.length>40)
                         {
-                            str=element.overview.slice(0,60)
+                            str=element.overview.slice(0,70)
                         }
                         const date=element.release_date.slice(0,4);
                                     
-                        // console.log(element);
+                        // console.log(element); <button> &nbsp;+&nbsp;</button>
                         content+= `<div class="movieBox animate__animated animate__fadeInUp animate_delay-4s 4s"> 
                                         <div class="rating">${element.vote_average}</div>
                                         <div class="movieImage">
@@ -151,10 +152,11 @@ const main=
                                             ${element.id}
                                         </div>
                                     </div>`;  
+                                    
                                 });
                                 scrn.innerHTML=content;
 
-
+                                Totalpages=data.total_pages;
 
                 })
                 .catch()
@@ -162,15 +164,71 @@ const main=
             .catch()
         });
 
-        
+        const pageLeft=document.querySelector("#pageLeft");
+        const pageRight=document.querySelector("#pageRight");
+        const pageId=document.querySelectorAll(".pageId");
+
         let movieBox=document.querySelector("#movieList");
         movieBox.addEventListener("click",(evt)=>{
             console.log(evt.target.id);
         window.location =`html/detail.html?id=${evt.target.id}`;
         });
 
+        console.log(page_id);
 
+        if(page_id>1)
+        {
+            let starter = page_id-2;
+            pageId.forEach((ele,key)=>{
 
+                pageId[key].innerHTML = starter;
+                pageId[key].href=`index.html?page=${starter}`;
+                starter++;
+                if(pageId[key].innerHTML==page_id)
+                {
+                    pageId[key].style.fontWeight="800";
+                    pageId[key].style.fontSize="1.2rem";
+                    pageId[key].style.color="orange";
+                }
+            });
+        }
+            
+        pageLeft.addEventListener("click",()=>{
+            pageId.forEach((page,key)=>{
+                if(pageId[0].innerHTML==1)
+                {
+                   // break;
+                }
+                else{
+                    const num= parseInt(pageId[key].innerHTML);
+                //    console.log(pageId[key]);
+                   pageId[key].href=`index.html?page=${num-1}`;
+                   pageId[key].innerHTML=num-1;
+                }
+               
+
+            });
+        });
+
+        pageRight.addEventListener("click",()=>{
+            console.log(Totalpages);
+            pageId.forEach((page,key)=>{
+                if(pageId[4].innerHTML==Totalpages)
+                {
+                    //do cothing
+                }
+                else
+                {
+                    const num= parseInt(pageId[key].innerHTML);
+                    // console.log(pageId[key]);
+                    pageId[key].href=`index.html?page=${num+1}`;
+                    pageId[key].innerHTML=num+1;
+                }
+                   
+
+            });
+
+        });
 
     }//END LOADER PAGE
 }//END MAIN CLASS

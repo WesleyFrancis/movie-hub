@@ -142,8 +142,75 @@ nav ul li:hover {
     background-color: #17547c;
     cursor: pointer;
 }
+#pages{
+    position: relative;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px 50px 50px;
+    justify-content: center;
+    background-color: #222B31;
+}
+#pages a{
+    margin: 5px 5px 5px 5px;
+    padding: .5rem;
+    border: 1px solid #646464;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 10px;
+    background-color: #2b5875;
+    width: 50px;
+}
+footer{
+    height:200px;
+    background-color: #0e1c25;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 500px) {
+    #movieList{
+        grid-template-columns: 1fr ;
+    }
 
-@keyframes borderChanged {
-    from {width: ;}
-    to {transform: rotate(20deg);}
-  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    #movieList{
+        grid-template-columns: 1fr ;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    #movieList{
+        grid-template-columns: 1fr 1fr ;
+    }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    #movieList{
+        grid-template-columns: 1fr 1fr 1fr ;
+    }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #movieList{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+}
+
+#pages button{
+    border-style: none;
+    margin:5px;
+    border-radius:10px;
+    background-color: none;
+    /* background-color:#267cb6; */
+}
+#pages button:hover{
+    cursor: pointer;
+}
