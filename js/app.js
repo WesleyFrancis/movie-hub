@@ -229,6 +229,17 @@ const main=
             });
 
         });
+        const toggel = document.querySelector("#toggel");
+        const mobile = document.querySelector("#mobile");
+        toggel.addEventListener("click",()=>{
+            if(mobile.style.display=="block")
+            {
+                mobile.style.display="none";
+            }
+            else{
+                mobile.style.display="block";
+            }
+        });
 
     }//END LOADER PAGE
 }//END MAIN CLASS
