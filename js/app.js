@@ -241,6 +241,13 @@ const main=
             }
         });
 
+        window.addEventListener('resize',()=>{
+            if(window.innerWidth>768)
+            {
+                mobile.style.display = "none";
+            }
+        });
+
     }//END LOADER PAGE
 }//END MAIN CLASS
 

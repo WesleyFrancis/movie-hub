@@ -169,6 +169,7 @@ footer{
 }
 #mobile{
     display: none;
+    width:100vw;
 }
 #toggel{
     display: none;
@@ -245,7 +246,7 @@ footer{
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 992px) {
 
     #mobile{
         display: none;
@@ -254,7 +255,7 @@ footer{
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+@media only screen and (max-width: 1200px) {
     /* #movieList{
         grid-template-columns: 1fr 1fr 1fr 1fr;
     } */
