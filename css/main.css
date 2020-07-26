@@ -12,7 +12,10 @@
     url("CustomFont.svg#filename") format("svg");
     } */
     
+nav{
 
+position: sticky;
+}
 #mainLayout{
     display: grid;
     grid-template-rows: auto auto auto;
@@ -38,6 +41,7 @@
     background-image: url("../images/interstellar.png");
     background-size: cover;
     background-position: right;
+    background-attachment: fixed;
 }
 #banner{
     display: grid;
